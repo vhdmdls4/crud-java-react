@@ -1,28 +1,26 @@
-package com.victorhugo.crudjavareact.model;
+package com.victorhugo.crudjavareact.dto;
 
+import com.victorhugo.crudjavareact.model.FinancialTransaction;
+import com.victorhugo.crudjavareact.model.Wallet;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Data
 @Builder
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+public class UserDto implements Serializable {
     private Long id;
     private String name;
     private String email;
     private String username;
     private String hashPassword;
     private LocalDate lastSession;
-    @OneToOne
     private Wallet wallet;
-    @OneToMany
     private List<FinancialTransaction> transactionList;
 }

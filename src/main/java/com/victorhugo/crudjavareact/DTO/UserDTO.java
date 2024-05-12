@@ -1,8 +1,7 @@
-package com.victorhugo.crudjavareact.dto;
+package com.victorhugo.crudjavareact.DTO;
 
 import com.victorhugo.crudjavareact.model.FinancialTransaction;
 import com.victorhugo.crudjavareact.model.Wallet;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto implements Serializable {
+public class UserDTO implements Serializable {
     private Long id;
     private String name;
     private String email;

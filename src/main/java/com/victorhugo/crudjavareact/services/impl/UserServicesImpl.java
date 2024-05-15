@@ -35,7 +35,9 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public void deleteUser(Long userId){
+    public void deleteUser(Long userId) throws GenericApplicationException{
+        userRepository.findById(userId)
+                .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
         userRepository.deleteById(userId);
     }
 

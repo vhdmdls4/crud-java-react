@@ -5,6 +5,7 @@ import com.victorhugo.crudjavareact.DTO.UserDTO;
 import com.victorhugo.crudjavareact.exception.GenericApplicationException;
 import com.victorhugo.crudjavareact.services.UserServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,16 @@ public class UserController {
             return ResponseEntity.ok().body(userDTOList);
         } catch (GenericApplicationException exception){
             return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteUserById(Long userId){
+        try {
+            userServices.deleteUser(userId);
+            return ResponseEntity.ok("Usuário deletado com sucesso");
+        } catch (GenericApplicationException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

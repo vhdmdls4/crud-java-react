@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserServices {
     public UserDTO createUser(CreateUserDTO createUserDTO) throws GenericApplicationException;
 
-    public void deleteUser(Long userId);
+    public void deleteUser(Long userId) throws GenericApplicationException;
 
     public UserDTO findUserById(Long userId);
 

@@ -4,6 +4,8 @@ import com.victorhugo.crudjavareact.DTO.CreateUserDTO;
 import com.victorhugo.crudjavareact.DTO.UserDTO;
 import com.victorhugo.crudjavareact.model.User;
 
+import java.util.stream.Collectors;
+
 public class UserMapper {
     public static UserDTO toDTO(User user){
         return UserDTO.builder()
@@ -12,7 +14,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .lastSession(user.getLastSession())
                 .wallet(user.getWallet())
-                .transactionList(user.getTransactionList())
+                .transactionListDTO(user.getTransactionList().stream().map(TransactionMapper::toDTO).collect(Collectors.toList()))
                 .name(user.getName())
                 .id(user.getId())
                 .build();
@@ -24,7 +26,7 @@ public class UserMapper {
                 .email(userDto.getEmail())
                 .lastSession(userDto.getLastSession())
                 .wallet(userDto.getWallet())
-                .transactionList(userDto.getTransactionList())
+                .transactionList(userDto.getTransactionListDTO().stream().map(TransactionMapper::toEntity).collect(Collectors.toList()))
                 .name(userDto.getName())
                 .build();
     }

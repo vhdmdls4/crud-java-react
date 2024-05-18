@@ -21,5 +21,5 @@ public class UserDTO implements Serializable {
     private String hashPassword;
     private LocalDate lastSession;
     private Wallet wallet;
-    private List<FinancialTransaction> transactionList;
+    private List<FinancialTransactionDTO> transactionListDTO;
 }

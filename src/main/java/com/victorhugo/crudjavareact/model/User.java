@@ -40,6 +40,7 @@ public class User {
     private LocalDate lastSession;
 
     @OneToOne
+    @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 
     @OneToMany(mappedBy = "user")

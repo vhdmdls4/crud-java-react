@@ -5,11 +5,7 @@ import com.victorhugo.crudjavareact.DTO.FinancialTransactionDTO;
 import com.victorhugo.crudjavareact.model.FinancialTransaction;
 import lombok.*;
 
-@Builder
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class TransactionMapper {
     public static FinancialTransactionDTO toDTO(FinancialTransaction financialTransaction){
         return FinancialTransactionDTO.builder()

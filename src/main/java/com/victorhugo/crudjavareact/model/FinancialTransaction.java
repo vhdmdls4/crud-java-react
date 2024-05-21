@@ -17,7 +17,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "transactions")
+@Table(name = "financial_transactions")
 public class FinancialTransaction {
     private BigDecimal value;
     @Id
@@ -32,6 +32,7 @@ public class FinancialTransaction {
     @JoinColumn(name = "target_wallet_id")
     private Wallet targetWallet;
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
     @Enumerated(EnumType.STRING)

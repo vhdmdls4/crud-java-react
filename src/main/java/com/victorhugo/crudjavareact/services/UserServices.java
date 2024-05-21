@@ -15,6 +15,6 @@ public interface UserServices {
 
     public UserDTO findUserById(Long userId);
 
-    public List<UserDTO> findAllUsers();
+    public List<UserDTO> findAllUsers() throws GenericApplicationException;
 
 }

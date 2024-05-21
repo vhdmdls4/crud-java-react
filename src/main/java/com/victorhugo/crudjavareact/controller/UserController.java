@@ -3,8 +3,10 @@ package com.victorhugo.crudjavareact.controller;
 import com.victorhugo.crudjavareact.DTO.CreateUserDTO;
 import com.victorhugo.crudjavareact.DTO.UserDTO;
 import com.victorhugo.crudjavareact.exception.GenericApplicationException;
+import com.victorhugo.crudjavareact.model.User;
 import com.victorhugo.crudjavareact.services.UserServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     final UserServices userServices;
@@ -44,6 +46,16 @@ public class UserController {
             return ResponseEntity.ok("Usuário deletado com sucesso");
         } catch (GenericApplicationException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDTO> findUserById(@PathVariable Long userId){
+        try {
+            UserDTO userDTO = userServices.findUserById(userId);
+            return ResponseEntity.ok(userDTO);
+        } catch (GenericApplicationException e){
+            return ResponseEntity.badRequest().build();
         }
     }
 }

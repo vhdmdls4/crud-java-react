@@ -26,12 +26,15 @@ public class FinancialTransaction {
     private Long id;
     private String description;
     private LocalDateTime dateTime;
+
     @ManyToOne
     @JoinColumn(name = "source_wallet_id")
     private Wallet sourceWallet;
+
     @ManyToOne
     @JoinColumn(name = "target_wallet_id")
     private Wallet targetWallet;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;

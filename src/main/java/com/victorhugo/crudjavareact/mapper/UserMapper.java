@@ -14,7 +14,6 @@ public class UserMapper {
                 .email(user.getEmail())
                 .lastSession(user.getLastSession())
                 .wallet(user.getWallet())
-                .transactionListDTO(user.getTransactionList().stream().map(TransactionMapper::toDTO).collect(Collectors.toList()))
                 .name(user.getName())
                 .id(user.getId())
                 .build();
@@ -26,7 +25,6 @@ public class UserMapper {
                 .email(userDto.getEmail())
                 .lastSession(userDto.getLastSession())
                 .wallet(userDto.getWallet())
-                .transactionList(userDto.getTransactionListDTO().stream().map(TransactionMapper::toEntity).collect(Collectors.toList()))
                 .name(userDto.getName())
                 .build();
     }

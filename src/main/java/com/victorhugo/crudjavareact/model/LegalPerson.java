@@ -3,17 +3,23 @@ package com.victorhugo.crudjavareact.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "legal_persons")
-public class LegalPerson {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@DiscriminatorValue("LEGAL")
+public class LegalPerson extends Person{
+//@Id
+//@GeneratedValue(strategy = GenerationType.IDENTITY)
+//@Column(nullable = false)
+//private Long id;
+    @NotBlank
+    @NotEmpty
     @Column(nullable = false)
-    private Long id;
     private String cnpj;
 }

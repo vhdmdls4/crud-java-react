@@ -25,6 +25,8 @@ public class FinancialTransaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
+
+    @Column(nullable = false)
     private LocalDateTime dateTime;
     //when a ToOne anotation is interpreted, java deal with it like a eager fetch, cause it's just a value
     //but when the anotation is ToMany, it's lazy fetch, it'll wait till need
@@ -41,11 +43,14 @@ public class FinancialTransaction {
     private User user;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private FinancialTransactionStatus status;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private FinancialTransactionType financialTransactionType;
 
+    @Column(nullable = false)
     private BigDecimal value;
 
 }

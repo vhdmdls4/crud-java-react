@@ -18,13 +18,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServicesImpl implements UserServices {
     final UserRepository userRepository;
+
     //TODO - work on performance improvement and error treatment in this methods
     @Override
-    public UserDTO createUser(CreateUserDTO createUserDTO) throws GenericApplicationException{
-        userRepository.findByUsernameOrEmail(createUserDTO.getUsername(), createUserDTO.getEmail())
-                .ifPresent(user -> {
-            throw new GenericApplicationException("Já existe um cadastro com esse username e/ou esse email");
-        });
+    public UserDTO createUser(CreateUserDTO createUserDTO) {
+        checkIfUserExists(createUserDTO.getUsername(), createUserDTO.getEmail());
 
         userRepository.save(UserMapper.createUserDTOtoEntity(createUserDTO));
         User userPersisted = userRepository.findByUsernameOrEmail(createUserDTO.getUsername(), createUserDTO.getEmail())
@@ -35,7 +33,7 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public void deleteUser(Long userId) throws GenericApplicationException{
+    public void deleteUser(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
         userRepository.deleteById(userId);
@@ -44,14 +42,21 @@ public class UserServicesImpl implements UserServices {
     @Override
     public UserDTO findUserById(Long userId) {
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
+                .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
         return UserMapper.toDTO(user);
     }
 
     @Override
-    public List<UserDTO> findAllUsers(){
-       List<User> userList = userRepository.findAll();
-       return userList.stream().map(UserMapper::toDTO).collect(Collectors.toList());
+    public List<UserDTO> findAllUsers() {
+        List<User> userList = userRepository.findAll();
+        return userList.stream().map(UserMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public void checkIfUserExists(String username, String email) {
+        userRepository.findByUsernameOrEmail(username, email)
+                .ifPresent(user -> {
+                    throw new GenericApplicationException("Já existe um cadastro com esse username e/ou esse email");
+                });
     }
 
 }

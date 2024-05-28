@@ -15,7 +15,6 @@ import java.util.List;
 public class CommunityWallet{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
     private BigDecimal balance;
     private BigDecimal debt;

@@ -20,6 +20,6 @@ public class LegalPerson extends Person{
 //private Long id;
     @NotBlank
     @NotEmpty
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cnpj;
 }

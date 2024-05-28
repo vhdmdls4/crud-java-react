@@ -19,7 +19,6 @@ import java.util.Objects;
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
     private BigDecimal balance;
     private BigDecimal debt;

@@ -35,3 +35,7 @@ package com.victorhugo.crudjavareact.controller;
 ### Quando usar @PathVariable ou @RequestParams
 - @RequestParams: filtros de pesquisa mais complexos, configuração do resultado como ordem e afins
 - @PathVariable: busca de recursos específicos, id de entidades ou afins
+
+#### Other
+* Caso uma injeção de dependência seja necessária, é possível utilizar a anotação @Autowired.
+* Só é possível injetar dependências em classes gerenciadas pelo Spring, como controllers, services e repositories, classes que o projeto instancia explicitamente não podem ser injetadas.

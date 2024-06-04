@@ -3,6 +3,7 @@ package com.victorhugo.crudjavareact.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.validation.constraints.NotBlank;
@@ -35,6 +36,7 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
 @Table(name = "users")
 public class User {
     @Id
@@ -63,6 +65,8 @@ public class User {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "wallet_id")
     private Wallet wallet;
+
+    private boolean deleted = Boolean.FALSE;
 
     @ManyToMany
 //    @JoinTable(name = "user_community_wallet",

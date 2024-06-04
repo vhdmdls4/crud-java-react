@@ -8,6 +8,8 @@ import com.victorhugo.crudjavareact.model.User;
 import com.victorhugo.crudjavareact.repository.UserRepository;
 import com.victorhugo.crudjavareact.services.UserServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,6 +52,12 @@ public class UserServicesImpl implements UserServices {
     public List<UserDTO> findAllUsers() {
         List<User> userList = userRepository.findAll();
         return userList.stream().map(UserMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<UserDTO> findAllUsersPageable(Pageable pageable) {
+        Page<User> userPage = userRepository.findAll(pageable);
+        return userPage.map(UserMapper::toDTO);
     }
 
     public void checkIfUserExists(String username, String email) {

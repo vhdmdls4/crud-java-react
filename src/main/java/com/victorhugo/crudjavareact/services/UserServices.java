@@ -3,6 +3,8 @@ package com.victorhugo.crudjavareact.services;
 import com.victorhugo.crudjavareact.DTO.CreateUserDTO;
 import com.victorhugo.crudjavareact.DTO.UserDTO;
 import com.victorhugo.crudjavareact.exception.GenericApplicationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,4 +19,5 @@ public interface UserServices {
 
     public List<UserDTO> findAllUsers();
 
+    public Page<UserDTO> findAllUsersPageable(Pageable pageable);
 }

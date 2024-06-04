@@ -9,15 +9,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/financial-transaction")
 @RequiredArgsConstructor
 public class TransactionController {
 
     final FinancialTransactionServices financialTransactionServices;
 
     @PostMapping
-    public ResponseEntity<CreateFinancialTransactionDTO> createTransaction(@RequestBody CreateFinancialTransactionDTO createFinancialTransactionDTO){
+    public ResponseEntity<CreateFinancialTransactionDTO> createTransaction(@Valid  @RequestBody CreateFinancialTransactionDTO createFinancialTransactionDTO){
         CreateFinancialTransactionDTO createdFinancialTransactionDTO = financialTransactionServices.createFinancialTransaction(createFinancialTransactionDTO);
         return ResponseEntity.ok().body(createdFinancialTransactionDTO);
     }

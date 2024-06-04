@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "natural_persons")
+//@Table(name = "natural_persons")
 @DiscriminatorValue("NATURAL")
 public class NaturalPerson extends Person {
 //    @Id

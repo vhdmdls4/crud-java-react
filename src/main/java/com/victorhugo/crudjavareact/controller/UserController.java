@@ -77,10 +77,10 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO){
+    public ResponseEntity<String> updateUser(@Valid @RequestBody UserDTO userDTO){
         try {
             UserDTO updatedUserDTO = userServices.updateUser(userDTO);
-            return ResponseEntity.ok(updatedUserDTO);
+            return ResponseEntity.ok("Usuário atualizado com sucesso");
         } catch (GenericApplicationException e){
             return ResponseEntity.badRequest().build();
         }

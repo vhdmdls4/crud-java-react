@@ -36,8 +36,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public void deleteUser(Long userId) {
-        userRepository.findById(userId)
-                .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
+        this.findUserById(userId);
         userRepository.deleteById(userId);
     }
 
@@ -58,6 +57,14 @@ public class UserServicesImpl implements UserServices {
     public Page<UserDTO> findAllUsersPageable(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable);
         return userPage.map(UserMapper::toDTO);
+    }
+
+    @Override
+    public UserDTO updateUser(UserDTO userDTO) {
+        this.findUserById(userDTO.getId());
+        User user = UserMapper.toEntity(userDTO);
+        userRepository.save(user);
+        return UserMapper.toDTO(user);
     }
 
     public void checkIfUserExists(String username, String email) {

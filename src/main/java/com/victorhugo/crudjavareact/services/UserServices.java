@@ -20,4 +20,6 @@ public interface UserServices {
     public List<UserDTO> findAllUsers();
 
     public Page<UserDTO> findAllUsersPageable(Pageable pageable);
+
+    UserDTO updateUser(UserDTO userDTO);
 }

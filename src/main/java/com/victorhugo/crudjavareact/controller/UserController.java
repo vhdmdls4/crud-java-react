@@ -75,4 +75,14 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PutMapping
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO){
+        try {
+            UserDTO updatedUserDTO = userServices.updateUser(userDTO);
+            return ResponseEntity.ok(updatedUserDTO);
+        } catch (GenericApplicationException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

@@ -11,8 +11,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -24,7 +29,7 @@ public class UserServicesImpl implements UserServices {
     //TODO - work on performance improvement and error treatment in this methods
     @Override
     public UserDTO createUser(CreateUserDTO createUserDTO) {
-        checkIfUserExists(createUserDTO.getUsername(), createUserDTO.getEmail());
+        validateIfUserExists(createUserDTO.getUsername(), createUserDTO.getEmail());
 
         userRepository.save(UserMapper.createUserDTOtoEntity(createUserDTO));
         User userPersisted = userRepository.findByUsernameOrEmail(createUserDTO.getUsername(), createUserDTO.getEmail())
@@ -67,11 +72,42 @@ public class UserServicesImpl implements UserServices {
         return UserMapper.toDTO(user);
     }
 
-    public void checkIfUserExists(String username, String email) {
+    @Override
+    public UserDTO patchUser(Long id, Map<String, Object> fields) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
+
+        validateAndSetFields(user, fields);
+
+        User updatedUser = userRepository.save(user);
+        return UserMapper.toDTO(updatedUser);
+    }
+
+    public void validateAndSetFields(User user, Map<String, Object> fields) {
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(User.class, key);
+
+            if (field == null) {
+                throw new GenericApplicationException("Field " + key + " does not exist on User");
+            }
+            if (value == null && !field.getType().isPrimitive() && field.getAnnotation(NotNull.class) != null && field.getAnnotation(NotBlank.class) != null) {
+                throw new GenericApplicationException("Null or empty values is not allowed for field " + key);
+            }
+
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, user, value);
+        });
+    }
+
+    public void validateIfUserExists(String username, String email) {
         userRepository.findByUsernameOrEmail(username, email)
                 .ifPresent(user -> {
                     throw new GenericApplicationException("Já existe um cadastro com esse username e/ou esse email");
                 });
+    }
+
+    public Boolean checkIfUserExists(String username, String email) {
+        return userRepository.findByUsernameOrEmail(username, email).isPresent();
     }
 
 }

@@ -8,18 +8,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface UserServices {
-    public UserDTO createUser(CreateUserDTO createUserDTO);
+    UserDTO createUser(CreateUserDTO createUserDTO);
 
-    public void deleteUser(Long userId);
+    void deleteUser(Long userId);
 
-    public UserDTO findUserById(Long userId);
+    UserDTO findUserById(Long userId);
 
-    public List<UserDTO> findAllUsers();
+    List<UserDTO> findAllUsers();
 
-    public Page<UserDTO> findAllUsersPageable(Pageable pageable);
+    Page<UserDTO> findAllUsersPageable(Pageable pageable);
 
     UserDTO updateUser(UserDTO userDTO);
+
+    UserDTO patchUser(Long id, Map<String, Object> fields);
+
+    Boolean checkIfUserExists(String username, String email);
 }

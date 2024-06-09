@@ -1,17 +1,16 @@
-package com.victorhugo.crudjavareact.model;
+package com.victorhugo.crudjavareact.DTO;
 
 import com.victorhugo.crudjavareact.enums.SupportType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import lombok.*;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
-@Embeddable
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class SupportInf {
+public class SupportInfDTO implements Serializable {
     private Long supportId;
     private SupportType supportType;
 }

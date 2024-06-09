@@ -4,45 +4,51 @@ import com.victorhugo.crudjavareact.DTO.CreateUserDTO;
 import com.victorhugo.crudjavareact.DTO.UserDTO;
 import com.victorhugo.crudjavareact.model.User;
 
-import java.util.stream.Collectors;
 
 public class UserMapper {
     public static UserDTO toDTO(User user){
         return UserDTO.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
                 .username(user.getUsername())
                 .hashPassword(user.getHashPassword())
-                .email(user.getEmail())
                 .lastSession(user.getLastSession())
-                .wallet(user.getWallet())
-                .name(user.getName())
-                .id(user.getId())
+                .wallet(
+                        WalletMapper.toDTO(user.getWallet()))
+                .communityWalletList(
+                        user.getCommunityWalletList().stream().map(CommunityWalletMapper::toDTO).toList())
                 .build();
     }
     public static User toEntity(UserDTO userDto){
         return User.builder()
+                .id(userDto.getId())
+                .name(userDto.getName())
+                .email(userDto.getEmail())
                 .username(userDto.getUsername())
                 .hashPassword(userDto.getHashPassword())
-                .email(userDto.getEmail())
                 .lastSession(userDto.getLastSession())
-                .wallet(userDto.getWallet())
-                .name(userDto.getName())
+                .wallet(
+                        WalletMapper.toEntity(userDto.getWallet()))
+                .communityWalletList(
+                        userDto.getCommunityWalletList().stream().map(CommunityWalletMapper::toEntity).toList())
                 .build();
     }
 
     public static CreateUserDTO entityToCreateUserDTO(User user){
         return CreateUserDTO.builder()
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .hashPassword(user.getHashPassword())
                 .name(user.getName())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .hashPassword(user.getHashPassword())
                 .build();
     }
     public static User createUserDTOtoEntity(CreateUserDTO createUserDTO){
         return User.builder()
-                .username(createUserDTO.getUsername())
-                .email(createUserDTO.getEmail())
-                .hashPassword(createUserDTO.getHashPassword())
                 .name(createUserDTO.getName())
+                .email(createUserDTO.getEmail())
+                .username(createUserDTO.getUsername())
+                .hashPassword(createUserDTO.getHashPassword())
                 .build();
     }
 }

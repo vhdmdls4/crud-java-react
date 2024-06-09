@@ -1,7 +1,5 @@
 package com.victorhugo.crudjavareact.DTO;
 
-import com.victorhugo.crudjavareact.model.FinancialTransaction;
-import com.victorhugo.crudjavareact.model.Wallet;
 import lombok.*;
 
 import java.io.Serializable;
@@ -20,6 +18,7 @@ public class UserDTO implements Serializable {
     private String username;
     private String hashPassword;
     private LocalDate lastSession;
-    private Wallet wallet;
-    private List<FinancialTransactionDTO> transactionListDTO;
+    private WalletDTO wallet;
+    private List<CommunityWalletDTO> communityWalletList;
+    private boolean deleted = Boolean.FALSE;
 }

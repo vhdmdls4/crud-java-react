@@ -68,10 +68,10 @@ public class User {
 
     private boolean deleted = Boolean.FALSE;
 
-    @ManyToMany
 //    @JoinTable(name = "user_community_wallet",
 //            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "community_wallet_id"))
+    @ManyToMany
     private List<CommunityWallet> communityWalletList;
 
 }

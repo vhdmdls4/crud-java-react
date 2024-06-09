@@ -17,6 +17,7 @@ public class WalletDTO implements Serializable {
     private BigDecimal debt;
     private BigDecimal credit;
     private BigDecimal availableBalance;
+    private UserDTO user;
     private List<FinancialTransactionDTO> financialTransactionList;
     private SupportInfDTO supportInf;
 }

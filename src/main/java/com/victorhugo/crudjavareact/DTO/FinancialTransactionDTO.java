@@ -1,8 +1,8 @@
 package com.victorhugo.crudjavareact.DTO;
 
 import com.victorhugo.crudjavareact.enums.FinancialTransactionStatus;
+import com.victorhugo.crudjavareact.enums.FinancialTransactionType;
 import com.victorhugo.crudjavareact.model.User;
-import com.victorhugo.crudjavareact.model.Wallet;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -18,9 +18,10 @@ public class FinancialTransactionDTO {
     private Long id;
     private String description;
     private LocalDateTime dateTime;
-    private Wallet sourceWallet;
-    private Wallet targetWallet;
-    private User user;
+    private WalletDTO sourceWallet;
+    private WalletDTO targetWallet;
+    private UserDTO user;
     private FinancialTransactionStatus status;
+    private FinancialTransactionType financialTransactionType;
 
 }

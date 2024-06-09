@@ -1,25 +1,25 @@
 package com.victorhugo.crudjavareact.services.impl;
 
 import com.victorhugo.crudjavareact.DTO.CreateFinancialTransactionDTO;
-import com.victorhugo.crudjavareact.DTO.FinancialTransactionDTO;
-import com.victorhugo.crudjavareact.exception.GenericApplicationException;
-import com.victorhugo.crudjavareact.mapper.TransactionMapper;
+import com.victorhugo.crudjavareact.mapper.FinancialTransactionMapper;
 import com.victorhugo.crudjavareact.model.FinancialTransaction;
 import com.victorhugo.crudjavareact.repository.FinancialTransactionRepository;
 import com.victorhugo.crudjavareact.services.FinancialTransactionServices;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+//TODO - implements a idempotency check in the createFinancialTransaction method
 
 @Service
+@RequiredArgsConstructor
 public class FinancialTransactionServicesImpl implements FinancialTransactionServices {
 
-    private FinancialTransactionRepository financialTransactionRepository;
+    final FinancialTransactionRepository financialTransactionRepository;
 
     @Override
     public CreateFinancialTransactionDTO createFinancialTransaction(CreateFinancialTransactionDTO createFinancialTransactionDTO) {
-        FinancialTransaction financialTransactionPersisted = financialTransactionRepository.save(TransactionMapper.createTransactionDTOtoEntity(createFinancialTransactionDTO));
-        return TransactionMapper.entityToCreateTransactionDTO(financialTransactionPersisted);
+        FinancialTransaction financialTransactionPersisted = financialTransactionRepository.save(FinancialTransactionMapper.createTransactionDTOtoEntity(createFinancialTransactionDTO));
+        return FinancialTransactionMapper.entityToCreateTransactionDTO(financialTransactionPersisted);
     }
 
 }

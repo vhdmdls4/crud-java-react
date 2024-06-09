@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -81,6 +82,16 @@ public class UserController {
         try {
             UserDTO updatedUserDTO = userServices.updateUser(userDTO);
             return ResponseEntity.ok("Usuário atualizado com sucesso");
+        } catch (GenericApplicationException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PatchMapping("/{userId}")
+    public ResponseEntity<UserDTO> patchUser(@PathVariable Long userId, @Valid @RequestBody Map<String, Object> fields){
+        try {
+            UserDTO userDTO = userServices.patchUser(userId, fields);
+            return ResponseEntity.ok(userDTO);
         } catch (GenericApplicationException e){
             return ResponseEntity.badRequest().build();
         }

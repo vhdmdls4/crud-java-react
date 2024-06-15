@@ -46,4 +46,12 @@ public class WalletServicesImpl implements WalletServices {
         };
     }
 
+    public void validateIfWalletExists(Long walletId){
+        walletRepository.findById(walletId).orElseThrow(() -> new GenericApplicationException("Wallet not found"));
+    }
+
+    public Boolean checkIfWalletExists(Long walletId){
+        return walletRepository.existsById(walletId);
+    }
+
 }

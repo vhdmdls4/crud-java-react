@@ -9,4 +9,5 @@ public interface WalletServices {
     WalletDTO createWallet(CreateWalletDTO createWalletDTO);
     WalletDTO findWalletById(Long id);
     WalletDTO findWalletByUserId(Long userId);
+    Boolean checkIfWalletExists(Long walletId);
 }

@@ -106,8 +106,8 @@ public class UserServicesImpl implements UserServices {
                 });
     }
 
-    public Boolean checkIfUserExists(String username, String email) {
-        return userRepository.findByUsernameOrEmail(username, email).isPresent();
+    public Boolean checkIfUserExists(Long id, String username, String email) {
+        return userRepository.findByIdOrUsernameOrEmail(id, username, email).isPresent();
     }
 
 }

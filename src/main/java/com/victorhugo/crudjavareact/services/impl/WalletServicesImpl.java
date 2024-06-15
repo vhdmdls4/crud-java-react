@@ -26,10 +26,24 @@ public class WalletServicesImpl implements WalletServices {
         return WalletMapper.toDTO(createdWallet);
     }
 
+    @Override
+    public WalletDTO findWalletById(Long id) {
+        Wallet walletFound = walletRepository.findById(id).orElseThrow(() -> new GenericApplicationException("Wallet not found"));
+        return WalletMapper.toDTO(walletFound);
+    }
+
+    @Override
+    public WalletDTO findWalletByUserId(Long userId) {
+        Wallet walletFound = walletRepository.findByUser_Id(userId).
+                orElseThrow(() -> new GenericApplicationException("Wallet not found"));
+        return WalletMapper.toDTO(walletFound);
+    }
+
     public void validateIfUserHasWallet(Long userId){
         UserDTO userFound = userServices.findUserById(userId);
         if(userFound.getWallet() != null) {
             throw new GenericApplicationException("User already has a wallet");
         };
     }
+
 }

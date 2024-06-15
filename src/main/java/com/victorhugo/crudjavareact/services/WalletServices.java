@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface WalletServices {
     WalletDTO createWallet(CreateWalletDTO createWalletDTO);
+    WalletDTO findWalletById(Long id);
+    WalletDTO findWalletByUserId(Long userId);
 }

@@ -17,6 +17,20 @@ Este é um projeto de aplicação web que utiliza Java e Spring Boot no back-end
 - Exclusão de usuários
 - Paginação na listagem de usuários
 
+## Application Properties ___(example)___
+
+```properties
+spring.application.name=crud-java-react
+spring.datasource.url=jdbc:mysql://localhost:3306/crud_java_react?useSSL=false&serverTimezone=UTC
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+spring.datasource.username=root
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
 ## Como Rodar o Projeto
 
 1. Clone o repositório para a sua máquina local.

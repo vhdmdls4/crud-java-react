@@ -46,9 +46,9 @@ class UserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should return a user by username or email")
+    @DisplayName("Should not return a user by username or email cause the user not exists")
     void findByUsernameOrEmailCaseEmpty() {
-        String username = "wictor";
+        String username = "";
         String email = "";
         Optional<User> foundUser = userRepository.findByUsernameOrEmail(username, email);
         assertThat((foundUser).isEmpty()).isTrue();

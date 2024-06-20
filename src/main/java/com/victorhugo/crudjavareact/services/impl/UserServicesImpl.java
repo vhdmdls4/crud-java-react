@@ -31,10 +31,8 @@ public class UserServicesImpl implements UserServices {
     public UserDTO createUser(CreateUserDTO createUserDTO) {
         validateIfUserExists(createUserDTO.getUsername(), createUserDTO.getEmail());
 
-        userRepository.save(UserMapper.createUserDTOtoEntity(createUserDTO));
-        User userPersisted = userRepository.findByUsernameOrEmail(createUserDTO.getUsername(), createUserDTO.getEmail())
-                .stream().findFirst()
-                .orElseThrow(() -> new GenericApplicationException("Usuário não encontrado"));
+        User userPersisted = userRepository.save(UserMapper.createUserDTOtoEntity(createUserDTO));
+
         //TODO - retornar o id junto posteriormente
         return UserMapper.toDTO(userPersisted);
     }

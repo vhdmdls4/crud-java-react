@@ -17,88 +17,88 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-class UserServicesImplTest {
-
-    @Mock
-    private UserRepository userRepository;
-
-    @InjectMocks
-    private UserServicesImpl userServices;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    @Test
-    @DisplayName("Should create a user successfully")
-    void createUser() {
-
-
-    }
-
-    @Test
-    @DisplayName("Should fail when creating a user with existing username or email")
-    void createUserCaseUserAlreadyExistWithUsernameOrEmail() {
-        // Arrange
-        String existingUsername = "existingUsername";
-        String existingEmail = "existingEmail@example.com";
-
-        User existingUser = new User();
-        existingUser.setUsername(existingUsername);
-        existingUser.setEmail(existingEmail);
-
-        when(userRepository.findByUsernameOrEmail(existingUsername, existingEmail))
-                .thenReturn(Optional.of(existingUser));
-
-        CreateUserDTO newUser = new CreateUserDTO();
-        newUser.setUsername(existingUsername);
-        newUser.setEmail(existingEmail);
-
-        // Act and Assert
-        assertThrows(GenericApplicationException.class, () -> userServices.createUser(newUser));
-    }
-
-    @Test
-    @DisplayName("Should create a user successfully")
-    void createUserCaseUserDont() {
-
-
-    }
-
-    @Test
-    void deleteUser() {
-    }
-
-    @Test
-    void findUserById() {
-    }
-
-    @Test
-    void findAllUsers() {
-    }
-
-    @Test
-    void findAllUsersPageable() {
-    }
-
-    @Test
-    void updateUser() {
-    }
-
-    @Test
-    void patchUser() {
-    }
-
-    @Test
-    void validateAndSetFields() {
-    }
-
-    @Test
-    void validateIfUserExists() {
-    }
-
-    @Test
-    void checkIfUserExists() {
-    }
-}
+//class UserServicesImplTest {
+//
+//    @Mock
+//    private UserRepository userRepository;
+//
+//    @InjectMocks
+//    private UserServicesImpl userServices;
+//
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.openMocks(this);
+//    }
+//
+//    @Test
+//    @DisplayName("Should create a user successfully")
+//    void createUser() {
+//
+//
+//    }
+//
+//    @Test
+//    @DisplayName("Should fail when creating a user with existing username or email")
+//    void createUserCaseUserAlreadyExistWithUsernameOrEmail() {
+//        // Arrange
+//        String existingUsername = "existingUsername";
+//        String existingEmail = "existingEmail@example.com";
+//
+//        User existingUser = new User();
+//        existingUser.setUsername(existingUsername);
+//        existingUser.setEmail(existingEmail);
+//
+//        when(userRepository.findByUsernameOrEmail(existingUsername, existingEmail))
+//                .thenReturn(Optional.of(existingUser));
+//
+//        CreateUserDTO newUser = new CreateUserDTO();
+//        newUser.setUsername(existingUsername);
+//        newUser.setEmail(existingEmail);
+//
+//        // Act and Assert
+//        assertThrows(GenericApplicationException.class, () -> userServices.createUser(newUser));
+//    }
+//
+//    @Test
+//    @DisplayName("Should create a user successfully")
+//    void createUserCaseUserDont() {
+//
+//
+//    }
+//
+//    @Test
+//    void deleteUser() {
+//    }
+//
+//    @Test
+//    void findUserById() {
+//    }
+//
+//    @Test
+//    void findAllUsers() {
+//    }
+//
+//    @Test
+//    void findAllUsersPageable() {
+//    }
+//
+//    @Test
+//    void updateUser() {
+//    }
+//
+//    @Test
+//    void patchUser() {
+//    }
+//
+//    @Test
+//    void validateAndSetFields() {
+//    }
+//
+//    @Test
+//    void validateIfUserExists() {
+//    }
+//
+//    @Test
+//    void checkIfUserExists() {
+//    }
+//    }

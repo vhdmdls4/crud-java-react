@@ -1,14 +1,19 @@
 package com.victorhugo.crudjavareact.model;
 
+import com.victorhugo.crudjavareact.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.proxy.HibernateProxy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +43,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -74,4 +79,39 @@ public class User {
     @ManyToMany
     private List<CommunityWallet> communityWalletList;
 
+    private UserRole role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return switch (role) {
+            case ADMIN -> List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            case SUPPORT -> List.of(new SimpleGrantedAuthority("ROLE_SUPPORT"));
+            default -> List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        };
+    }
+
+    @Override
+    public String getPassword() {
+        return hashPassword;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

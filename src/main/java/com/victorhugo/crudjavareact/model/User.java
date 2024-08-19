@@ -84,10 +84,17 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return switch (role) {
-            case ADMIN -> List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            case ADMIN -> List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_SUPPORT"));
             case SUPPORT -> List.of(new SimpleGrantedAuthority("ROLE_SUPPORT"));
             default -> List.of(new SimpleGrantedAuthority("ROLE_USER"));
         };
+    }
+
+    @Override
+    public String getUsername(){
+        return username;
     }
 
     @Override

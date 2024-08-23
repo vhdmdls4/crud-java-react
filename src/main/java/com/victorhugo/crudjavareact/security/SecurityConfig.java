@@ -17,7 +17,7 @@ public class SecurityConfig {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorization -> authorization.anyRequest().authenticated())
+//                .authorizeHttpRequests(authorization -> authorization.anyRequest().authenticated())
                 .build();
     }
 }

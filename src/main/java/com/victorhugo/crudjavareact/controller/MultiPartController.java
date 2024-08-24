@@ -29,6 +29,31 @@ public class MultiPartController {
         });
         return ResponseEntity.ok("Arquivos processados com sucesso");
     }
+    /*
+    *
+    * Front-end request example
+    * const url = "http://localhost:8080/test-multi";
+    const formData = new FormData();
+
+    // Assuming `file` is an array of files
+    const listaFiles = Array.from(file);
+
+    listaFiles.forEach((file, index) => {
+      formData.append(`listaFilhos[${index}].multipartFile`, file);
+      formData.append(`listaFilhos[${index}].name`, file.name);
+    });
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    axios.post(url, formData, config).then((response) => {
+      console.log(response.data);
+    });
+    *
+    * */
 
     @GetMapping
     public ResponseEntity<?> handleGetTest(){

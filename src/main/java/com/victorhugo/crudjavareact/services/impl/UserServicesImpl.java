@@ -97,6 +97,7 @@ public class UserServicesImpl implements UserServices {
         });
     }
 
+    @Override
     public void validateIfUserExists(String username, String email) {
         userRepository.findByUsernameOrEmail(username, email)
                 .ifPresent(user -> {

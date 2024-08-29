@@ -1,5 +1,6 @@
 package com.victorhugo.crudjavareact.DTO;
 
+import com.victorhugo.crudjavareact.enums.UserRole;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,5 +14,6 @@ public class CreateUserDTO implements Serializable {
     private String name;
     private String email;
     private String username;
-    private String hashPassword;
+    private String password;
+    private UserRole userRole;
 }

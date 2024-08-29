@@ -27,4 +27,6 @@ public interface UserServices {
     UserDTO patchUser(Long id, Map<String, Object> fields);
 
     Boolean checkIfUserExists(Long id, String username, String email);
+
+    void validateIfUserExists(String username, String email);
 }

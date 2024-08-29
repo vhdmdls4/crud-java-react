@@ -40,7 +40,7 @@ public class UserMapper {
                 .name(user.getName())
                 .email(user.getEmail())
                 .username(user.getUsername())
-                .hashPassword(user.getHashPassword())
+                .password(user.getPassword())
                 .build();
     }
     public static User createUserDTOtoEntity(CreateUserDTO createUserDTO){
@@ -48,7 +48,7 @@ public class UserMapper {
                 .name(createUserDTO.getName())
                 .email(createUserDTO.getEmail())
                 .username(createUserDTO.getUsername())
-                .hashPassword(createUserDTO.getHashPassword())
+                .hashPassword(createUserDTO.getPassword())
                 .build();
     }
 }

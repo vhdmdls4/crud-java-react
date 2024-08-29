@@ -81,6 +81,14 @@ public class User implements UserDetails {
 
     private UserRole role;
 
+    public User(String name, String email, String username, String hashPassword, UserRole role) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.hashPassword = hashPassword;
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return switch (role) {

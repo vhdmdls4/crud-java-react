@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FinancialTransactionServicesImpl implements FinancialTransactionServices {
 
-    final FinancialTransactionRepository financialTransactionRepository;
+    private final FinancialTransactionRepository financialTransactionRepository;
 
     @Override
     public CreateFinancialTransactionDTO createFinancialTransaction(CreateFinancialTransactionDTO createFinancialTransactionDTO) {

@@ -2,7 +2,10 @@ package com.victorhugo.crudjavareact.controller;
 
 import com.victorhugo.crudjavareact.DTO.AuthUserDTO;
 import com.victorhugo.crudjavareact.DTO.RegisterUserDTO;
+import com.victorhugo.crudjavareact.DTO.UserDTO;
+import com.victorhugo.crudjavareact.exception.GenericApplicationException;
 import com.victorhugo.crudjavareact.model.User;
+import com.victorhugo.crudjavareact.services.AuthService;
 import com.victorhugo.crudjavareact.services.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +26,22 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final UserServices userServices;
+    private final AuthService authService;
 
     @PostMapping
-    public ResponseEntity login(@RequestBody @Valid AuthUserDTO authUserDTO){
+    public ResponseEntity<?> login(@RequestBody @Valid AuthUserDTO authUserDTO){
         UsernamePasswordAuthenticationToken usernamePassAuthToken = new UsernamePasswordAuthenticationToken(authUserDTO.login(), authUserDTO.password());
         var auth = this.authenticationManager.authenticate(usernamePassAuthToken);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    public ResponseEntity register(@RequestBody @Valid RegisterUserDTO registerUserDTO){
-        userServices.validateIfUserExists(registerUserDTO.username(), registerUserDTO.email());
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(registerUserDTO.password());
-        User newUser = new User(registerUserDTO.name(), registerUserDTO.email(), registerUserDTO.username(), encryptedPassword, registerUserDTO.role());
-        userServices.createUser();
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterUserDTO registerUserDTO){
+        try {
+            UserDTO registeredUser = authService.registerUser(registerUserDTO);
+            return ResponseEntity.ok(registeredUser);
+        } catch (GenericApplicationException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
